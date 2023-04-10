@@ -867,3 +867,37 @@ if a letter was not previusly added to the lib then it will not enter the if and
 windowSize = i - start + 1; will result in reaching n, in this case 3;
 we add  + 1 since when we add the indx to start we +1 so start moves to a space that was not previously visited
 */
+
+
+
+/*
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+*/
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+var deleteDuplicates = function(head) {
+    let previous;
+    let current = head;
+
+    if ( current === null) return head;
+    
+
+    while (current !== null) {
+        
+        if (current.next !== null && current.val === current.next.val ) {
+            current.next = current.next.next
+        } else {
+            current = current.next
+        }
+        
+    }
+    return head
+
+};
