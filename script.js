@@ -1020,4 +1020,48 @@ function learningToSlide(arr, window) {
     return maxSum
 }
 
-console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0], 3))
+//console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0], 3));
+
+
+/* 
+Matrix traversal example
+
+check notebook for example
+*/
+
+function robotPaths(matrix) {
+    // Write your code here
+    let result = 0;
+    let maxRows = matrix.length;
+    let maxCol = matrix[0].length;
+    
+    function traverse ( row, col ) {
+        /* out of bounds */
+        if( row >= maxRows || row < 0 || col < 0 || col >= maxCol ) {
+            return;
+        }
+        /* visited previously */
+        if (matrix[row][col] === null ) {
+            return;
+        }
+        
+        /* Reached destination */
+        if ( row === maxRows - 1 && col === maxCol - 1 ) {
+            result++
+            return
+        }
+        
+        let temp = matrix[row][col];
+        matrix[row][col] = null;
+        traverse(row + 1, col);
+        traverse(row - 1, col);
+        traverse(row, col + 1);
+        traverse(row, col - 1);
+        matrix[row][col] = temp
+        
+    }
+    
+    traverse(0,0); 
+    return result;
+
+}
