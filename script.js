@@ -953,6 +953,49 @@ function bfs(origin) {
 
 
 
+/**
+  Find the maximum sum of a countiguous subarray of size 3
+  Find the maximum sum of a countiguous subarray of size 3
+  [4,2,1,7,8,1,2,-8,1,0]
+           H 
+        C
+  TEMP =   1 +7  
+  OPT = 10
+  Counter = 2
+
+
+
+
+
+
+ 1- What makes H to mvoes and in which conditions does H stop?
+  A- H stops moving once the counter is equal to 3, and up to the end of the array,
+  2- When and how do we record TEMP ?
+  A- We add each value at index H to TEMP as H is moving. When C moves , we substrict the value at index C from TEMP
+  3- How do we update the OPT
+  A- Once H stop, we compare current OPT to TEMP and we pick the MAX
+  4- What makes C to mvoes and in which conditions does H stop?
+  A- C move once counter size is equal to 3. 
+  
+
+// make window size var, make a current count var, make a max count var, H and C
+
+for ( until end of arr) {
+make check if H has reached 3 if so start recording current and moving C
+make if statement everytime window size is 3 update current count and compare it to max count.
+if max count is larger set as new max,
+}
+
+return max count
+
+  -----------------------------------------------------------------------------------------------
+    [4,2,2,7,21,8,12,10,7,4,23,11]
+
+    Find the smallest subarray sum greater of equal 20
+
+
+*/
+
 function learningToSlide(arr, window) {
 
     let hunter = 0;
