@@ -951,25 +951,30 @@ function bfs(origin) {
     return res
 }
 
-/* sliding window variation */
+
 
 function learningToSlide(arr, window) {
+
     let hunter = 0;
     let catchUp = 0;
     let currentSum = 0;
-    let maxSum = 0;
+    let maxSum = -Infinity;
+
 
     while (hunter < arr.length) {
 
-        if (hunter - catchUp === window) {
+        currentSum += arr[hunter]
+
+        if ((hunter - catchUp) === window) {
+            console.log(currentSum - arr[catchUp])
             currentSum -= arr[catchUp];
-            catchUp++;
+            catchUp++
         }
-        maxSum = Math.max(currentSum, maxSum);
-        hunter++;
+        maxSum = Math.max(currentSum, maxSum)
+        hunter++
     }
 
-    return maxSum;
+    return maxSum
 }
 
-console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0, 20], 3));
+console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0], 3))
