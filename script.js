@@ -1051,13 +1051,16 @@ function robotPaths(matrix) {
             return
         }
         
+        /* mark Cell/Node/Vertex as visited*/
         let temp = matrix[row][col];
         matrix[row][col] = null;
+
         traverse(row + 1, col);
         traverse(row - 1, col);
         traverse(row, col + 1);
         traverse(row, col - 1);
-        matrix[row][col] = temp
+
+        matrix[row][col] = temp;
         
     }
     
