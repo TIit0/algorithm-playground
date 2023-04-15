@@ -882,22 +882,94 @@ Given the head of a sorted linked list, delete all duplicates such that each ele
  *     this.next = (next===undefined ? null : next)
  * }
  */
-var deleteDuplicates = function(head) {
+var deleteDuplicates = function (head) {
     let previous;
     let current = head;
 
-    if ( current === null) return head;
-    
+    if (current === null) return head;
+
 
     while (current !== null) {
-        
-        if (current.next !== null && current.val === current.next.val ) {
+
+        if (current.next !== null && current.val === current.next.val) {
             current.next = current.next.next
         } else {
             current = current.next
         }
-        
+
     }
     return head
 
 };
+
+
+
+
+/* 
+breath travelsal example for
+
+            C
+           / \
+    A --- B   E---F---D
+           \ / \ /
+            H   G
+
+    Origin point: A
+
+    return a string of all the nodes
+*/
+
+function bfs(origin) {
+    // Write your code here
+
+    if (origin === null) return "";
+
+    let queue = [];
+    let visited = {};
+    let res = "";
+
+
+    queue.push(origin);
+    visited[origin.id] = true;
+
+    while (queue.length > 0) {
+        let current = queue.shift();
+        let edges = current.edges;
+
+        for (let i = 0; i < edges.length; i++) {
+            let edge = edges[i];
+
+            if (!visited[edge.id]) {
+
+                queue.push(edge)
+                visited[edge.id] = true
+            }
+        }
+        res += current.id
+    }
+
+    return res
+}
+
+/* sliding window variation */
+
+function learningToSlide(arr, window) {
+    let hunter = 0;
+    let catchUp = 0;
+    let currentSum = 0;
+    let maxSum = 0;
+
+    while (hunter < arr.length) {
+
+        if (hunter - catchUp === window) {
+            currentSum -= arr[catchUp];
+            catchUp++;
+        }
+        maxSum = Math.max(currentSum, maxSum);
+        hunter++;
+    }
+
+    return maxSum;
+}
+
+console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0, 20], 3));
