@@ -1068,3 +1068,79 @@ function robotPaths(matrix) {
     return result;
 
 }
+
+
+/* Alternate aproach with a library */
+
+function robotPathsalternate(matrix) {
+    // Write your code here
+    let result = 0;
+    let maxRows = matrix.length;
+    let maxCol = matrix[0].length;
+    
+    let visited = new Set()
+    
+    function traverse ( row, col ) {
+        let key = row + "_" + col;
+        /* out of bounds */
+        if( row >= maxRows || row < 0 || col < 0 || col >= maxCol ) {
+            return;
+        }
+        /* visited previously */
+        if ( visited.has(key) ) {
+            return;
+        }
+        
+        /* Reached destination */
+        if ( row === maxRows - 1 && col === maxCol - 1 ) {
+            result++
+            return
+        }
+        
+        visited.add(key);
+        
+        let temp = matrix[row][col];
+        matrix[row][col] = null;
+        traverse(row + 1, col);
+        traverse(row - 1, col);
+        traverse(row, col + 1);
+        traverse(row, col - 1);
+        matrix[row][col] = temp
+        
+        visited.delete(key)
+    }
+    
+    traverse(0,0); 
+    return result;
+
+}
+
+
+/* delete duplicate data in a linked list like a set  */
+
+function condense(head) {
+    // Write your code here
+    if (head === null) {
+        return head
+    }
+    
+    let previous = null
+    let current = head;
+    let library = {};
+    
+    while (current !== null) {
+        library[current.data] = library[current.data] + 1 || 0;
+        
+        if ( library[current.data] > 0) {
+            previous.next = current.next;
+            current = current.next;
+        } else {
+            previous = current;
+            current = current.next
+        }
+        
+    }
+    
+    return head
+
+}
