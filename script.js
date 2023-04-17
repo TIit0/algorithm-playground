@@ -996,6 +996,8 @@ return max count
 
 */
 
+/* return max sum of (n = window) contiguos integers */
+
 function learningToSlide(arr, window) {
 
     let hunter = 0;
@@ -1034,23 +1036,23 @@ function robotPaths(matrix) {
     let result = 0;
     let maxRows = matrix.length;
     let maxCol = matrix[0].length;
-    
-    function traverse ( row, col ) {
+
+    function traverse(row, col) {
         /* out of bounds */
-        if( row >= maxRows || row < 0 || col < 0 || col >= maxCol ) {
+        if (row >= maxRows || row < 0 || col < 0 || col >= maxCol) {
             return;
         }
         /* visited previously */
-        if (matrix[row][col] === null ) {
+        if (matrix[row][col] === null) {
             return;
         }
-        
+
         /* Reached destination */
-        if ( row === maxRows - 1 && col === maxCol - 1 ) {
+        if (row === maxRows - 1 && col === maxCol - 1) {
             result++
             return
         }
-        
+
         /* mark Cell/Node/Vertex as visited*/
         let temp = matrix[row][col];
         matrix[row][col] = null;
@@ -1061,10 +1063,10 @@ function robotPaths(matrix) {
         traverse(row, col - 1);
 
         matrix[row][col] = temp;
-        
+
     }
-    
-    traverse(0,0); 
+
+    traverse(0, 0);
     return result;
 
 }
@@ -1077,28 +1079,28 @@ function robotPathsalternate(matrix) {
     let result = 0;
     let maxRows = matrix.length;
     let maxCol = matrix[0].length;
-    
+
     let visited = new Set()
-    
-    function traverse ( row, col ) {
+
+    function traverse(row, col) {
         let key = row + "_" + col;
         /* out of bounds */
-        if( row >= maxRows || row < 0 || col < 0 || col >= maxCol ) {
+        if (row >= maxRows || row < 0 || col < 0 || col >= maxCol) {
             return;
         }
         /* visited previously */
-        if ( visited.has(key) ) {
+        if (visited.has(key)) {
             return;
         }
-        
+
         /* Reached destination */
-        if ( row === maxRows - 1 && col === maxCol - 1 ) {
+        if (row === maxRows - 1 && col === maxCol - 1) {
             result++
             return
         }
-        
+
         visited.add(key);
-        
+
         let temp = matrix[row][col];
         matrix[row][col] = null;
         traverse(row + 1, col);
@@ -1106,11 +1108,11 @@ function robotPathsalternate(matrix) {
         traverse(row, col + 1);
         traverse(row, col - 1);
         matrix[row][col] = temp
-        
+
         visited.delete(key)
     }
-    
-    traverse(0,0); 
+
+    traverse(0, 0);
     return result;
 
 }
@@ -1123,24 +1125,108 @@ function condense(head) {
     if (head === null) {
         return head
     }
-    
+
     let previous = null
     let current = head;
     let library = {};
-    
+
     while (current !== null) {
         library[current.data] = library[current.data] + 1 || 0;
-        
-        if ( library[current.data] > 0) {
+
+        if (library[current.data] > 0) {
             previous.next = current.next;
             current = current.next;
         } else {
             previous = current;
             current = current.next
         }
-        
+
     }
-    
+
     return head
 
 }
+
+/*
+
+There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
+
+ 
+
+Example 1:
+
+Input: candies = [2,3,5,1,3], extraCandies = 3
+Output: [true,true,true,false,true] 
+Explanation: If you give all extraCandies to:
+- Kid 1, they will have 2 + 3 = 5 candies, which is the greatest among the kids.
+- Kid 2, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+- Kid 3, they will have 5 + 3 = 8 candies, which is the greatest among the kids.
+- Kid 4, they will have 1 + 3 = 4 candies, which is not the greatest among the kids.
+- Kid 5, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+Example 2:
+
+Input: candies = [4,2,1,1,2], extraCandies = 1
+Output: [true,false,false,false,false] 
+Explanation: There is only 1 extra candy.
+Kid 1 will always have the greatest number of candies, even if a different kid is given the extra candy.
+Example 3:
+
+Input: candies = [12,1,12], extraCandies = 10
+Output: [true,false,true]
+ 
+
+Constraints:
+
+n == candies.length
+2 <= n <= 100
+1 <= candies[i] <= 100
+1 <= extraCandies <= 50
+
+
+
+ /*
+               H
+      [2,3,5,1,6]
+       C
+
+       maxCandies = 6
+       current = 2
+
+
+       // make hunter check all items in array compare the largest and set as the goal
+       // once hunter reaches end of arr  start catch up phase and compare 
+ */
+
+
+
+function kidsWithCandies(candies, extraCandies) {
+
+    let maxCandies = 0;
+    let catchUp = 0;
+    let hunter = 0;
+    let result = [];
+
+
+    while (catchUp < candies.length) {
+
+
+
+        if (hunter >= candies.length) {
+            candies[catchUp] + extraCandies >= maxCandies ? result.push(true) : result.push(false)
+            catchUp++
+        } else {
+            maxCandies = Math.max(candies[hunter], maxCandies);
+            hunter++
+        }
+
+    }
+
+    return result;
+
+};
+
+console.log(kidsWithCandies([2,3,5,1,3]))
