@@ -1229,4 +1229,32 @@ function kidsWithCandies(candies, extraCandies) {
 
 };
 
-console.log(kidsWithCandies([2,3,5,1,3]))
+console.log(kidsWithCandies([2, 3, 5, 1, 3]))
+
+
+
+
+const spiralMatrix = (matrix) => {
+    let row = 0;
+    let col = 0;
+    let res = [];
+
+    while (matrix[row][col] !== undefined) {
+        res.push(matrix[row][col]);
+        matrix[row][col] = undefined;
+
+        if (matrix[row][col + 1] !== undefined && matrix[row][col + 1] !== null) {
+            col += 1;
+        } else if (matrix[row + 1] && matrix[row + 1][col] !== undefined && matrix[row + 1][col] !== null) {
+            row += 1;
+        } else if (matrix[row][col - 1] !== undefined && matrix[row][col - 1] !== null) {
+            col -= 1;
+        } else if (matrix[row - 1] && matrix[row - 1][col] !== undefined && matrix[row - 1][col] !== null) {
+            row -= 1;
+        } else {
+            break;
+        }
+    }
+
+    return res;
+};
