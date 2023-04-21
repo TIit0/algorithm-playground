@@ -1024,6 +1024,62 @@ function learningToSlide(arr, window) {
 
 //console.log(learningToSlide([4, 2, 1, 7, 8, 1, 2, -8, 1, 0], 3));
 
+/* sliding window  + library  the reason we used a library was to optimize the comparison / iteration time
+
+you have been given an integers array nums and an integer K.
+
+if you find any duplicate elements and the absolute difference between there indices gives you a value <= k then you can return true.
+
+if you couldn't find such element you can return false.
+
+eg: nums[] = {4, 3, 1, 4} k = 5 indices of 4 is : 0 , 3
+the abs value of indices = |0 - 3| = 3
+which is <= k so we can return true.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,1], k = 3
+Output: true
+Example 2:
+
+Input: nums = [1,0,1,1], k = 1
+Output: true
+Example 3:
+
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+
+
+*/
+
+
+var containsNearbyDuplicate = function (nums, k) {
+
+    let catchUp = 0;
+    let hunter = 0;
+    let window = {};
+
+    while (hunter < nums.length) {
+        const current = nums[hunter];
+
+        if (current in window) {
+            return true
+        } else {
+            window[current] = current;
+        }
+
+        if (hunter - catchUp === k) {
+            delete window[nums[catchUp]];
+            catchUp++
+        }
+
+        hunter++
+    }
+    return false
+};
+
 
 /* 
 Matrix traversal example
