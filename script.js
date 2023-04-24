@@ -1356,7 +1356,7 @@ var maxDepth = function (root) {
 };
 
 
-function roverMove(matrixSize, cmds) {
+function roverMove1(matrixSize, cmds) {
     // Write your code here
     let i = 0;
     let count = 0;
@@ -1393,6 +1393,32 @@ function roverMove(matrixSize, cmds) {
     }
 
 console.log(matrix[row][column])
+
+}
+
+
+function roverMove(matrixSize, cmds) {
+    // Write your code here
+    
+
+    /* simulated matrix */
+    let coors = 0
+    let upperLimit = (matrixSize * matrixSize) - 1
+
+    for (let command of cmds) {
+        
+        if (command === "UP" && (coors - matrixSize) >= 0 ) {
+            coors = coors - matrixSize;
+        } else if (command === "DOWN" && (coors + matrixSize) <= upperLimit) {
+            coors = coors + matrixSize;
+        } else if (command === "LEFT" && (coors - 1) >= 0) {
+            coors = coors - 1;
+        } else if (command === "RIGHT" && (coors + 1) <= upperLimit) {
+            coors = coors + 1;
+        }
+    }
+
+console.log(coors)
 
 }
 
