@@ -702,7 +702,7 @@ function allOdds(numsArr) {
     return newArr
 }
 
-console.log(allOdds([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+//console.log(allOdds([1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
 
 function mregeTwoLists(arr1, arr2) {
@@ -1285,7 +1285,7 @@ function kidsWithCandies(candies, extraCandies) {
 
 };
 
-console.log(kidsWithCandies([2, 3, 5, 1, 3]))
+//console.log(kidsWithCandies([2, 3, 5, 1, 3]))
 
 
 
@@ -1354,3 +1354,46 @@ var maxDepth = function (root) {
 
     return Math.max(left, right) + 1;
 };
+
+
+function roverMove(matrixSize, cmds) {
+    // Write your code here
+    let i = 0;
+    let count = 0;
+    let matrix = [];
+
+    /* populate matrix */
+    while (i < matrixSize) {
+        let row = [];
+        for (let j = 0; j < matrixSize; j++) {
+            row[j] = count
+            count++
+        }
+        matrix.push(row)
+        i++
+    }
+
+    let row = 0;
+    let rowLimit = matrix.length;
+    let column = 0;
+    let columnLimit = matrix[0].length;
+    console.log(matrix)
+    for (let command of cmds) {
+        console.log(row, "row")
+        console.log(column, "column")
+        if (command === "UP" && matrix[row - 1] !== undefined) {
+            row = row - 1
+        } else if (command === "DOWN" && matrix[row + 1] !== undefined) {
+            row = row + 1
+        } else if (command === "LEFT" && matrix[row][column - 1] !== undefined) {
+            column = column - 1;
+        } else if (command === "RIGHT" && matrix[row][column + 1] !== undefined) {
+            column = column + 1
+        }
+    }
+
+console.log(matrix[row][column])
+
+}
+
+roverMove(4, ["RIGHT", "UP", "DOWN", "LEFT", "DOWN", "DOWN"])
