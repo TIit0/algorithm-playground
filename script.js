@@ -1374,9 +1374,7 @@ function roverMove1(matrixSize, cmds) {
     }
 
     let row = 0;
-    let rowLimit = matrix.length;
     let column = 0;
-    let columnLimit = matrix[0].length;
     console.log(matrix)
     for (let command of cmds) {
         console.log(row, "row")
@@ -1422,4 +1420,20 @@ console.log(coors)
 
 }
 
-roverMove(4, ["RIGHT", "UP", "DOWN", "LEFT", "DOWN", "DOWN"])
+//roverMove(4, ["RIGHT", "UP", "DOWN", "LEFT", "DOWN", "DOWN"]);
+
+
+function logPairs(numsArr) {
+let combinations = 0;
+    for (let i = 0; i < numsArr.length; i++) {
+        for ( let j = 0; j < numsArr.length; j++) {
+            if (i !== j) {
+                combinations++
+                console.log(`${numsArr[i]}, ${numsArr[j]}`)
+            }
+        }
+    }
+    console.log(combinations)
+}
+
+logPairs(["a","b","c","d","e"])
