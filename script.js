@@ -1390,22 +1390,22 @@ function roverMove1(matrixSize, cmds) {
         }
     }
 
-console.log(matrix[row][column])
+    console.log(matrix[row][column])
 
 }
 
 
 function roverMove(matrixSize, cmds) {
     // Write your code here
-    
+
 
     /* simulated matrix */
     let coors = 0
     let upperLimit = (matrixSize * matrixSize) - 1
 
     for (let command of cmds) {
-        
-        if (command === "UP" && (coors - matrixSize) >= 0 ) {
+
+        if (command === "UP" && (coors - matrixSize) >= 0) {
             coors = coors - matrixSize;
         } else if (command === "DOWN" && (coors + matrixSize) <= upperLimit) {
             coors = coors + matrixSize;
@@ -1416,7 +1416,7 @@ function roverMove(matrixSize, cmds) {
         }
     }
 
-console.log(coors)
+    console.log(coors)
 
 }
 
@@ -1424,9 +1424,9 @@ console.log(coors)
 
 
 function logPairs(numsArr) {
-let combinations = 0;
+    let combinations = 0;
     for (let i = 0; i < numsArr.length; i++) {
-        for ( let j = 0; j < numsArr.length; j++) {
+        for (let j = 0; j < numsArr.length; j++) {
             if (i !== j) {
                 combinations++
                 console.log(`${numsArr[i]}, ${numsArr[j]}`)
@@ -1436,4 +1436,113 @@ let combinations = 0;
     console.log(combinations)
 }
 
-logPairs(["a","b","c","d","e"])
+//logPairs(["a","b","c","d","e"])
+
+
+function logPairsAndSums(numsArr) {
+
+    for (let i = 0; i < numsArr.length; i++) {
+        console.log(numsArr[i]);
+    }
+
+    for (let num1 of numsArr) {
+        console.log("num change to: ", num1)
+        for (let num2 of numsArr) {
+            console.log(num1 + num2)
+        }
+    }
+}
+
+//logPairsAndSums([1,2,3,4,5]);
+
+
+/*
+
+["x","e","c"]
+
+["d", "a", "b", "e"]
+
+*/
+
+
+function findIfContains(arr1, arr2) {
+
+    if (arr1.length < 1 || arr2.length < 1) return false;
+    let library = {};
+
+    for (letter of arr1) {
+        if (!library[letter]) {
+            library[letter] = letter;
+        }
+    }
+
+    for (letter of arr2) {
+        if (library[letter] === letter) return true;
+    }
+    return false;
+}
+
+
+//console.log(findIfContains(["x", "c", "a", "b"], ["e", "h", "t", "d"]));
+
+/* one-line solution */
+const findIfContains2 = (arr1, arr2) => arr1.some(
+    item => arr2.includes(item)
+)
+
+//console.log(findIfContains2(["x", "c", "a", "d"], ["e", "h", "t", "d"]))
+
+
+/* write google interview code lecture 58 on my own to practice and understand */
+
+
+
+
+/* 
+Given the root of a binary search tree and the lowest and highest boundaries as low and high, trim the tree so that all its elements lies in [low, high]. Trimming the tree should not change the relative structure of the elements that will remain in the tree (i.e., any node's descendant should remain a descendant). It can be proven that there is a unique answer.
+
+Return the root of the trimmed binary search tree. Note that the root may change depending on the given bounds.
+
+ 
+
+Example 1:
+
+
+Input: root = [1,0,2], low = 1, high = 2
+Output: [1,null,2]
+Example 2:
+
+
+Input: root = [3,0,4,null,2,null,null,1], low = 1, high = 3
+Output: [3,2,null,1]
+ 
+
+Constraints:
+
+The number of nodes in the tree is in the range [1, 104].
+0 <= Node.val <= 104
+The value of each node in the tree is unique.
+root is guaranteed to be a valid binary search tree.
+0 <= low <= high <= 104
+*/
+
+
+
+var trimBST = function (root, low, high) {
+    if (!root) {
+        return null;
+    }
+
+    if (root.val < low) {
+        return trimBST(root.right, low, high);
+    }
+
+    if (root.val > high) {
+        return trimBST(root.left, low, high);
+    }
+
+    root.left = trimBST(root.left, low, high);
+    root.right = trimBST(root.right, low, high);
+
+    return root;
+};
