@@ -1594,6 +1594,71 @@ var merge = function(nums1, m, nums2, n) {
         }
     }
 
-
-
 };
+
+ /* array from scarcth */
+
+class MyArray {
+
+    constructor() {
+        this.length = 0;
+        this.data = {};
+    }
+
+    get(index) {
+        return this.data[index]
+    }
+
+    push(item) {
+        this.data[this.length] = item;
+        this.length++;
+        return this.length;
+    }
+
+    pop() {
+        const removedValue = this.data[this.length - 1];
+        delete this.data[this.length - 1]
+        this.length--;
+
+        return removedValue;
+    }
+
+    delete(index) {
+        let i = index;
+
+        while (i < this.length - 1) {
+                this.data[i] = this.data[i + 1]
+            i++
+        }
+        delete this.data[this.length -1];
+        this.length--;
+    }
+}
+
+/* 
+
+     i
+[1,2,3,4,5]
+
+     i
+[1,2,4,5]
+
+i = 1;
+index = 2
+
+length = 4
+*/
+
+const myNewArray = new MyArray();
+myNewArray.push("hi")
+myNewArray.push("hi1")
+myNewArray.push("hi2")
+myNewArray.push("hi3")
+myNewArray.push("hi4")
+myNewArray.push("hi5")
+myNewArray.push("hi")
+console.log(myNewArray)
+console.log(myNewArray.pop())
+console.log(myNewArray)
+myNewArray.delete(0)
+console.log(myNewArray)
