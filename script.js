@@ -1649,7 +1649,7 @@ index = 2
 length = 4
 */
 
-const myNewArray = new MyArray();
+/* const myNewArray = new MyArray();
 myNewArray.push("hi")
 myNewArray.push("hi1")
 myNewArray.push("hi2")
@@ -1661,4 +1661,36 @@ console.log(myNewArray)
 console.log(myNewArray.pop())
 console.log(myNewArray)
 myNewArray.delete(0)
-console.log(myNewArray)
+console.log(myNewArray) */
+
+
+
+
+
+
+/* create a function that reverses a string:  */
+
+/*
+with two pointers
+    i
+    tito
+        j
+
+    j = arr.length - 1
+    i = 0
+
+    i++
+    j = arr.length - (i + 1)
+*/
+
+function reverse(string) {
+let reversed = ""
+
+for ( let i = string.length - 1; i >= 0; i--) {
+    reversed += string[i]
+}
+
+return reversed
+}
+
+console.log(reverse("Hi my name is tito"))
