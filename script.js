@@ -1580,7 +1580,8 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 
 */
 
-var merge = function(nums1, m, nums2, n) {
+/*
+const merge = function(nums1, m, nums2, n) {
 
     let i = m - 1;
     let j = n - 1;
@@ -1596,7 +1597,9 @@ var merge = function(nums1, m, nums2, n) {
 
 };
 
- /* array from scarcth */
+*/
+
+/* array from scarcth */
 
 class MyArray {
 
@@ -1627,10 +1630,10 @@ class MyArray {
         let i = index;
 
         while (i < this.length - 1) {
-                this.data[i] = this.data[i + 1]
+            this.data[i] = this.data[i + 1]
             i++
         }
-        delete this.data[this.length -1];
+        delete this.data[this.length - 1];
         this.length--;
     }
 }
@@ -1681,16 +1684,66 @@ with two pointers
 
     i++
     j = arr.length - (i + 1)
+
+
+    or
+    string.split("").reverse().join("")
 */
 
+
+
 function reverse(string) {
-let reversed = ""
+    let reversed = ""
 
-for ( let i = string.length - 1; i >= 0; i--) {
-    reversed += string[i]
+    for (let i = string.length - 1; i >= 0; i--) {
+        reversed += string[i]
+    }
+
+    return reversed
 }
 
-return reversed
+//console.log(reverse("Hi my name is tito"));
+
+
+/*
+function mergeSortedArrays(arr1, arr2) {
+    return [...arr1, ...arr2].sort( (a,b) => a - b);
+}
+*/
+
+
+function mergeSortedArrays(arr1, arr2) {
+
+    if (arr1.length < 1) {
+        return arr2
+    } else if (arr2.length < 1) {
+        return arr1
+    }
+
+    const sortedArr = [];
+    let item1 = arr1[0];
+    let item2 = arr2[0];
+
+    let i = 1;
+    let j = 1;
+
+    while (item1 || item2) {
+        console.log(item1, item2)
+
+        if (!item2 || item1 < item2) {
+            sortedArr.push(item1);
+            item1 = arr1[i]
+            i++;
+        } else {
+            sortedArr.push(item2);
+            item2 = arr2[j];
+            j++;
+        }
+    }
+
+    return sortedArr;
 }
 
-console.log(reverse("Hi my name is tito"))
+// console.log(mergeSortedArrays([0,3,4], [4,6,30]));
+
+
