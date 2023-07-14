@@ -1747,3 +1747,42 @@ function mergeSortedArrays(arr1, arr2) {
 // console.log(mergeSortedArrays([0,3,4], [4,6,30]));
 
 
+/* longest unique substring */
+
+function longest_ss(inp_str) {
+    if (inp_str === '') {
+        return false;
+    }
+
+    let l = 0, r = 0;
+    let best_l = 0, best_r = 0;
+    let repeated_chars = false;
+    let chars = {};
+
+    while (r < inp_str.length) {
+        if (!repeated_chars) {
+            chars[inp_str[r]] = (chars[inp_str[r]] || 0) + 1;
+            if (chars[inp_str[r]] > 1) {
+                repeated_chars = true;
+            }
+            r++;
+        }
+
+        while (repeated_chars) {
+            chars[inp_str[l]] -= 1;
+            if (chars[inp_str[l]] === 1) {
+                repeated_chars = false;
+            }
+            l++;
+        }
+
+        if (r - l > best_r - best_l) {
+            best_l = l;
+            best_r = r;
+        }
+    }
+
+    return inp_str.substring(best_l, best_r);
+}
+
+// console.log(longest_ss('abcabcab'));
